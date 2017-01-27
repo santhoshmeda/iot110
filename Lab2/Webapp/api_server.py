@@ -9,15 +9,6 @@ else:
 
 app = Flask(__name__)
 
-
-#... API routes to be added below
-
-## Run the website and make sure to make
-##  it externally visible with 0.0.0.0:5000 (default)
-if __name__ == "__main__":
-    app.debug = True
-    app.run(host='0.0.0.0')
-
 #DEFAULT Route
 # curl http://0.0.0.0:5000/
 @app.route("/")
@@ -29,3 +20,24 @@ def hello():
 @app.route('/getHello')
 def getRequestHello():
     return "Hello API Server : GET Request!\n"
+
+#POST REQUEST
+# curl --data 'mykey=FOOBAR' http://0.0.0.0:5000/createHello
+# echo 'mykey={"name":"Gene Cernan","age":"82"}' | curl -d @- http://0.0.0.0:5000/createHello
+@app.route('/createHello', methods = ['POST'])
+def postRequestHello():
+    mydata = request.data
+    print "Data:" + mydata
+    assert request.path == '/createHello'
+    assert request.method == 'POST'
+    data = str(request.form['mykey'])
+    # import pdb; pdb.set_trace()
+    return "Hello API Server : You sent a "+ request.method + \
+            " message on route path " + request.path + \
+            " \n\tData:" +  data + "\n"
+
+## Run the website and make sure to make
+##  it externally visible with 0.0.0.0:5000 (default)
+if __name__ == "__main__":
+    app.debug = True
+    app.run(host='0.0.0.0')
