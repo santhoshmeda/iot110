@@ -1,3 +1,5 @@
+#!usr/bin/python
+
 import time
 from GPIO import PiGpio
 from Debouncer import Debouncer
@@ -9,16 +11,17 @@ db = Debouncer()
 
 @app.route("/")
 def index():
-    # create an instance of my pi gpio object class.
-    pi_gpio = PiGpio()
-    switch_state = pi_gpio.read_switch()
-    led1_state = pi_gpio.get_led(1)
-    led2_state = pi_gpio.get_led(2)
-    led3_state = pi_gpio.get_led(3)
-    return render_template('index.html', switch=switch_state,
-                                led1=led1_state,
-                                led2=led2_state,
-                                led3=led3_state)
+    return render_template('index.html')
+    # # create an instance of my pi gpio object class.
+    # pi_gpio = PiGpio()
+    # switch_state = pi_gpio.read_switch()
+    # led1_state = pi_gpio.get_led(1)
+    # led2_state = pi_gpio.get_led(2)
+    # led3_state = pi_gpio.get_led(3)
+    # return render_template('index.html', switch=switch_state,
+    #                             led1=led1_state,
+    #                             led2=led2_state,
+    #                             led3=led3_state)
 
 # ============================== API Routes ===================================
 # ============================ GET: /leds/<state> =============================
@@ -78,6 +81,6 @@ def myData():
             yield('data: {0} {1} {2} {3}\n\n'.format(debounced_switch,led_red,led_grn,led_blu))
             time.sleep(0.1)
     return Response(get_state_values(), mimetype='text/event-stream')
-    
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, threaded=True)
