@@ -12,16 +12,6 @@ db = Debouncer()
 @app.route("/")
 def index():
     return render_template('index.html')
-    # # create an instance of my pi gpio object class.
-    # pi_gpio = PiGpio()
-    # switch_state = pi_gpio.read_switch()
-    # led1_state = pi_gpio.get_led(1)
-    # led2_state = pi_gpio.get_led(2)
-    # led3_state = pi_gpio.get_led(3)
-    # return render_template('index.html', switch=switch_state,
-    #                             led1=led1_state,
-    #                             led2=led2_state,
-    #                             led3=led3_state)
 
 # ============================== API Routes ===================================
 # ============================ GET: /leds/<state> =============================
