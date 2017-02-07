@@ -3,11 +3,13 @@
 import time
 from GPIO import PiGpio
 from Debouncer import Debouncer
+from bmp280 import PiBMP280
 from flask import *
 
 app = Flask(__name__)
 pi_gpio = PiGpio()
 db = Debouncer()
+pi_bmp280 = PiBMP280()
 
 @app.route("/")
 def index():
@@ -68,7 +70,8 @@ def myData():
             led_red = str(pi_gpio.get_led(1))
             led_grn = str(pi_gpio.get_led(2))
             led_blu = str(pi_gpio.get_led(3))
-            yield('data: {0} {1} {2} {3}\n\n'.format(debounced_switch,led_red,led_grn,led_blu))
+            (temperature, pressure) = pi_bmp280.readBMP280All()
+            yield('data: {0} {1} {2} {3} {4} {5} \n\n'.format(debounced_switch,led_red,led_grn,led_blu,temperature,pressure))
             time.sleep(0.1)
     return Response(get_state_values(), mimetype='text/event-stream')
 

@@ -75,18 +75,52 @@
           <h4 class="gpio">[GPIO23]</h4></div>
         <div class="col-sm-2"></div>
       </div>
+
+          <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-3">
+            <h4 class="gpio">Temperature(C)</h4>
+          </div>
+          <div class="col-sm-3 switch">
+            <h4><span id="switch" class="label label-default">&#9925</span></h4>
+            <!-- <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> -->
+          </div>
+          <div class="col-sm-2">
+            <h4><span id="temp">NA</span></h4>
+            <h4 class="temp"</h4></div>
+
+          <div class="col-sm-2"></div>
+        </div>
+
+            <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-3">
+              <h4 class="gpio">Pressure(hPa)</h4>
+            </div>
+            <div class="col-sm-3 Prsure">
+              <h4><span id="Prsure" class="label label-default">&#9889</span></h4>
+            </div>
+            <div class="col-sm-2 value">
+              <!-- <h4 class="gpio">NA</h4></div> -->
+              <h4><span id="value">NA</span></h4>
+            <div class="col-sm-2"></div>
+          </div>
+
+
+
     </div>
   </div>
 </body>
 
 <script type="text/javascript">
+// function UpdatePage() {
 $(document).ready(function() {
   // establish global variables for LED status
   var led1;
   var led2;
   var led3;
 
-   var iotSource = new EventSource("{{ url_for('myData') }}");
+  var iotSource = new EventSource("{{ url_for('myData') }}");
   /* intercept the incoming states from SSE */
   iotSource.onmessage = function(e) {
     var params = e.data.split(' ');
@@ -94,8 +128,20 @@ $(document).ready(function() {
     updateLeds(1, params[1]);
     updateLeds(2, params[2]);
     updateLeds(3, params[3]);
+    updateTemp(params[4]);
+    updatePressure(params[5]);
     console.log(e.data);
   };
+
+  /* update the Temperature based on its SSE state monitor */
+  function updateTemp(temperature) {
+      $('#temp').text(temperature);
+    }
+
+  /* update the Pressure based on its SSE state monitor */
+  function updatePressure(pressure) {
+     $('#value').text(pressure);
+   }
 
   /* update the Switch based on its SSE state monitor */
   function updateSwitch(switchValue) {
@@ -186,6 +232,9 @@ $('#blu_led_btn').click(function() {
 });
 
 });
+
+// };
+
 
 </script>
 
