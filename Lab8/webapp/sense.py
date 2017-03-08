@@ -22,6 +22,14 @@ class PiSenseHat(object):
     def getHumidity(self):
         return self.sense.get_humidity()
 
+    # Set pixel
+    def set_pixel(self,x,y,color):
+        self.sense.set_pixel(x,y,color)
+
+    #clear pixel displayLine
+    def clear_display(self):
+        self.sense.clear()
+
     #Temperature from Humidity
     def getTempfrmHumidity(self):
         return self.sense.get_temperature_from_humidity()

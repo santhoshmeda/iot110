@@ -48,7 +48,7 @@ def index():
 # ============================== API Routes ===================================
 # ============================= POST: /motor/<state> ============================
 # get sensor values methods from curl for example
-# curl http://iot8e3c:5000/sensors
+# curl http://iot6041:5000/sensors
 # -----------------------------------------------------------------------------
 @app.route("/sensors", methods=['GET'])
 def sensors():
@@ -76,8 +76,8 @@ def set_led_red(duty_cycle):
 
 # ============================= POST: /motor/<state> ============================
 # control motor by POST methods from curl for example
-# curl http://iot8e3c:5000/motor/0
-# curl http://iot8e3c:5000/motor/1
+# curl http://iot6041:5000/motor/0
+# curl http://iot6041:5000/motor/1
 # -----------------------------------------------------------------------------
 @app.route("/motor/<int:motor_state>", methods=['GET'])
 def motor(motor_state):
@@ -92,7 +92,7 @@ def motor(motor_state):
 
 # ====================== GET: /motor_speed/<speed_rpm> ========================
 # set the motor speed in RPM by GET method from curl. For example:
-# curl http://iot8e3c:5000/motor_speed/60
+# curl http://iot6041:5000/motor_speed/60
 # -----------------------------------------------------------------------------
 @app.route("/motor_speed/<int:motor_speed>", methods=['GET'])
 def set_motor_speed(motor_speed):
@@ -101,7 +101,7 @@ def set_motor_speed(motor_speed):
 
 # ===================== GET: /motor_direction/<direction> =====================
 # set the motor direction (CW/CCW) by GET method from curl. For example:
-# curl http://iot8e3c:5000/motor_direction/1
+# curl http://iot6041:5000/motor_direction/1
 # -----------------------------------------------------------------------------
 @app.route("/motor_zero", methods=['GET'])
 def set_motor_zero():
@@ -110,7 +110,7 @@ def set_motor_zero():
 
 # ===================== GET: /motor_direction/<direction> =====================
 # set the motor direction (CW/CCW) by GET method from curl. For example:
-# curl http://iot8e3c:5000/motor_direction/1
+# curl http://iot6041:5000/motor_direction/1
 # -----------------------------------------------------------------------------
 @app.route("/motor_direction/<string:direction>", methods=['GET'])
 def set_motor_dir(direction):
@@ -119,7 +119,7 @@ def set_motor_dir(direction):
 
 # ===================== GET: /motor_steps/<steps> =====================
 # set the motor steps (int) by HTTP GET method  CURL example:
-# curl http://iot8e3c:5000/motor_steps/100
+# curl http://iot6041:5000/motor_steps/100
 # -----------------------------------------------------------------------------
 @app.route("/motor_steps/<int:steps>", methods=['GET'])
 def set_motor_steps(steps):
@@ -128,7 +128,7 @@ def set_motor_steps(steps):
 
 # ====================== GET: /motor_position/<position> ======================
 # set the motor position by HTTP GET method. CURL example:
-# curl http://iot8e3c:5000/motor_position/1
+# curl http://iot6041:5000/motor_position/1
 # -----------------------------------------------------------------------------
 @app.route("/motor_position/<int:position>", methods=['GET'])
 def set_motor_pos(position):
@@ -138,7 +138,7 @@ def set_motor_pos(position):
 
 # ======================= POST: /motor_multistep/<dir> =========================
 # set the motor multistep by POST method from curl. For example:
-# curl --data 'steps=10&direction=CW' http://iot8e3c:5000/motor_multistep
+# curl --data 'steps=10&direction=CW' http://iot6041:5000/motor_multistep
 # -----------------------------------------------------------------------------
 @app.route("/motor_multistep", methods=['POST'])
 def postMotorMultistep():
@@ -173,7 +173,7 @@ def postRequestTest():
 # ============================= Run App Server ================================
 # =========================== Endpoint: /myData ===============================
 # read the sensor values by GET method from curl for example
-# curl http://iot8e3c:5000/myData
+# curl http://iot6041:5000/myData
 # -----------------------------------------------------------------------------
 @app.route('/myData')
 def myData():
