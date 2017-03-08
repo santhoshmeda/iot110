@@ -69,6 +69,15 @@ class PiSenseHat(object):
         sensors = {'name' : 'sense-hat', 'inertial' : {}}
         return sensors
 
+    #Pixel display
+    def set_pixel(self,x,y,color):
+        self.sense.set_pixel(x,y,color)
+
+    #Clear display
+    def clear_display(self):
+        self.sense.clear()
+        
+
     def getAllSensors(self):
         sensors = {'name' : 'sense-hat', 'environmental' : {}, 'inertial' :  {}, 'joystick' : {}}
         sensors['environmental']['pressure'] = {'value':self.sense.get_pressure(), 'unit':'mbar'}
